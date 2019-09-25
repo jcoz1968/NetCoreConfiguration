@@ -8,10 +8,12 @@ namespace TennisBookings.Web.Pages
     public class IndexModel : PageModel
     {
         private readonly IGreetingService _greetingService;
+        private readonly IConfiguration _configuration;
 
-        public IndexModel(IGreetingService greetingService)
+        public IndexModel(IGreetingService greetingService, IConfiguration configuration)
         {
             _greetingService = greetingService;
+            _configuration = configuration;
         }
 
         public string Greeting { get; private set; }
@@ -22,7 +24,14 @@ namespace TennisBookings.Web.Pages
 
         public async Task OnGet()
         {
-            
+            var homePageFeatures = _configuration.GetSection("Features:HomePage");
+            if (homePageFeatures.GetValue<bool>("EnableGreeting"))
+            {
+                Greeting = _greetingService.GetRandomGreeting();
+            }
+
+            ShowWeatherForecast = homePageFeatures.GetValue<bool>("EnableWeatherForecast");
+                
         }
     }
 }
