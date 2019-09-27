@@ -7,13 +7,12 @@ namespace TennisBookings.Web.Services
     public class WeatherForecaster : IWeatherForecaster
     {
         private readonly IWeatherApiClient _weatherApiClient;
+        public bool ForecastEnabled => true;
 
         public WeatherForecaster(IWeatherApiClient weatherApiClient)
         {
             _weatherApiClient = weatherApiClient;
         }
-
-        public bool ForecastEnabled => true;
 
         public async Task<CurrentWeatherResult> GetCurrentWeatherAsync()
         {
