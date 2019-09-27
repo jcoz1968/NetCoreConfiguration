@@ -27,6 +27,7 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
             services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
 
             services
