@@ -40,6 +40,10 @@ namespace TennisBookings.Web
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.WeatherApi, Configuration.GetSection("ExternalServices:WeatherApi"));
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.ProductsApi, Configuration.GetSection("ExternalServices:ProductsApi"));
 
+            services.Configure<ContentConfiguration>(Configuration.GetSection("Content"));
+            services.AddSingleton<IContentConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<ContentConfiguration>>().Value);
+            
             services
                 .AddAppConfiguration(Configuration)
                 .AddBookingServices()
