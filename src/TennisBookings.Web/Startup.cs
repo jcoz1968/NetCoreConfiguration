@@ -27,8 +27,14 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            // services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
+            services.AddOptions<HomePageConfiguration>()
+                .Bind(Configuration.GetSection("Features:HomePage"))
+                .ValidateDataAnnotations();
+
+            services.AddHostedService<ValidateOptionsService>();
+
             services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
-            services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.WeatherApi, Configuration.GetSection("ExternalServices:WeatherApi"));
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.ProductsApi, Configuration.GetSection("ExternalServices:ProductsApi"));
 
