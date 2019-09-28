@@ -8,12 +8,9 @@ namespace TennisBookings.Web.Core.DependencyInjection
 {
     public static class WeatherServiceCollectionExtensions
     {
-        private static IConfiguration _configuration;
-
-        public static IServiceCollection AddWeatherForecasting(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddWeatherForecasting(this IServiceCollection services, IConfiguration config)
         {
-            _configuration = configuration;
-            if (_configuration.GetValue<bool>("Features:WeatherForecasting:EnableWeatherForecast"))
+            if (config.GetValue<bool>("Features:WeatherForecasting:EnableWeatherForecast"))
             {
                 services.AddHttpClient<IWeatherApiClient, WeatherApiClient>();
                 services.TryAddSingleton<IWeatherForecaster, WeatherForecaster>();
@@ -23,7 +20,7 @@ namespace TennisBookings.Web.Core.DependencyInjection
             {
                 services.TryAddSingleton<IWeatherForecaster, DisabledWeatherForecaster>();
             }
-            
+
             return services;
         }
     }

@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TennisBookings.Web.Configuration;
+using TennisBookings.Web.External;
+using TennisBookings.Web.External.Models;
 using TennisBookings.Web.Services;
 
 namespace TennisBookings.Web.Pages
@@ -11,29 +14,30 @@ namespace TennisBookings.Web.Pages
     {
         private readonly IWeatherForecaster _weatherForecaster;
         private readonly IGreetingService _greetingService;
-        // private readonly IProductsApiClient _productsApiClient;
+        private readonly IProductsApiClient _productsApiClient;
         private readonly HomePageConfiguration _homePageConfig;
+
+        public IndexModel(
+            IWeatherForecaster weatherForecaster,
+            IGreetingService greetingService,
+            IProductsApiClient productsApiClient,
+            IOptionsSnapshot<HomePageConfiguration> options)
+        {
+            _weatherForecaster = weatherForecaster;
+            _greetingService = greetingService;
+            _productsApiClient = productsApiClient;
+            _homePageConfig = options.Value;
+
+            GreetingColour = _greetingService.GreetingColour ?? "black";
+        }
+
         public string Greeting { get; private set; }
         public bool ShowGreeting => !string.IsNullOrEmpty(Greeting);
         public string GreetingColour { get; private set; }
         public string ForecastSectionTitle { get; private set; }
         public string WeatherDescription { get; private set; }
         public bool ShowWeatherForecast { get; private set; }
-        // public IReadOnlyCollection<Product> Products { get; set; }
-
-        public IndexModel(
-            IWeatherForecaster weatherForecaster,
-            IGreetingService greetingService,
-            // IProductsApiClient productsApiClient,
-            IOptionsMonitor<HomePageConfiguration> options)
-        {
-            _weatherForecaster = weatherForecaster;
-            _greetingService = greetingService;
-            // _productsApiClient = productsApiClient;
-            _homePageConfig = options.CurrentValue;
-
-            GreetingColour = _greetingService.GreetingColour ?? "black";
-        }
+        public IReadOnlyCollection<Product> Products { get; set; }
 
         public async Task OnGet()
         {
@@ -72,8 +76,12 @@ namespace TennisBookings.Web.Pages
                             WeatherDescription = "It's snowing!! Outdoor courts will remain closed until the snow has cleared.";
                             break;
                     }
-                }
+                }                
             }
+
+            var productsResult = await _productsApiClient.GetProducts();
+
+            Products = productsResult.Products;
         }
     }
 }

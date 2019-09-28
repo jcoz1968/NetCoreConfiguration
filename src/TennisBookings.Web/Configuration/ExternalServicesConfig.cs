@@ -4,6 +4,7 @@
     {
         public const string WeatherApi = "WeatherApi";
         public const string ProductsApi = "ProductsApi";
+        public string ApiKey { get; }
 
         public string Url { get; set; }
         public int MinsToCache { get; set; }
