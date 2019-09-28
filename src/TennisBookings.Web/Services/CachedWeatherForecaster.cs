@@ -11,7 +11,6 @@ namespace TennisBookings.Web.Services
     {
         private readonly IWeatherForecaster _weatherForecaster;
         private readonly IDistributedCache<CurrentWeatherResult> _cache;
-        // private readonly ExternalServicesConfig _externalServicesConfig;
         private readonly int _minsToCache;
 
         public bool ForecastEnabled => _weatherForecaster.ForecastEnabled;
@@ -21,7 +20,6 @@ namespace TennisBookings.Web.Services
         {
             _weatherForecaster = weatherForecaster;
             _cache = cache;
-            // _externalServicesConfig = options.Value;
             _minsToCache = options.Get(ExternalServicesConfig.WeatherApi).MinsToCache;
         }
 

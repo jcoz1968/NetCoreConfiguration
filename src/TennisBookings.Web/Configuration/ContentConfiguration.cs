@@ -2,6 +2,6 @@
 {
     public class ContentConfiguration : IContentConfiguration
     {
-        public bool CheckForProfanity { get; }
+        public bool CheckForProfanity { get; set; }
     }
 }

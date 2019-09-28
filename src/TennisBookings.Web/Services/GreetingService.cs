@@ -18,8 +18,8 @@ namespace TennisBookings.Web.Services
         //private readonly IOptionsMonitor<GreetingConfiguration> _greetingConfiguration;
 
         public GreetingService(
-            IWebHostEnvironment webHostEnvironment,
-            ILogger<GreetingConfiguration> logger,
+            IWebHostEnvironment webHostEnvironment, 
+            ILogger<GreetingConfiguration> logger, 
             IOptionsMonitor<GreetingConfiguration> options)
         {
             var webRootPath = webHostEnvironment.WebRootPath;
@@ -37,7 +37,7 @@ namespace TennisBookings.Web.Services
                 logger.LogInformation("The greeting configuration has been updated.");
             });
         }
-
+        
         public string[] Greetings { get; }
 
         public string[] LoginGreetings { get; }
@@ -58,8 +58,7 @@ namespace TennisBookings.Web.Services
 
         private string GetRandomValue(IReadOnlyList<string> greetings)
         {
-            if (greetings.Count == 0)
-                return string.Empty;
+            if (greetings.Count == 0) return string.Empty;
 
             var greetingToUse = Random.Value.Next(greetings.Count);
 
