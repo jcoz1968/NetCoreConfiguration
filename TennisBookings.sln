@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B5BA0B59-8D91-4F07-8090-34BDE097EFC9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisBookings.Web", "src\TennisBookings.Web\TennisBookings.Web.csproj", "{74A1EEEE-6FB1-482E-98AD-C1BC19078448}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherService.Api", "src\WeatherService.Api\WeatherService.Api.csproj", "{8AC8E8E8-A3C2-4A10-BCA8-CD8065901DF0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisBookings.Web.Tests", "test\TennisBookings.Web.Tests\TennisBookings.Web.Tests.csproj", "{9EF795DD-3974-4DFA-B3BA-65CF9E659166}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,18 @@ Global
 		{8AC8E8E8-A3C2-4A10-BCA8-CD8065901DF0}.Release|x64.Build.0 = Release|Any CPU
 		{8AC8E8E8-A3C2-4A10-BCA8-CD8065901DF0}.Release|x86.ActiveCfg = Release|Any CPU
 		{8AC8E8E8-A3C2-4A10-BCA8-CD8065901DF0}.Release|x86.Build.0 = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|x64.Build.0 = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Debug|x86.Build.0 = Debug|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|x64.ActiveCfg = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|x64.Build.0 = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|x86.ActiveCfg = Release|Any CPU
+		{9EF795DD-3974-4DFA-B3BA-65CF9E659166}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

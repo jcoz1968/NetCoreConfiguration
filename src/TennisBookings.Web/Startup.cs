@@ -7,6 +7,9 @@ using TennisBookings.Web.Core.DependencyInjection;
 using TennisBookings.Web.Data;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using TennisBookings.Web.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace TennisBookings.Web
 {
@@ -26,6 +29,21 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
+
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<HomePageConfiguration>, HomePageConfigurationValidation>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<ExternalServicesConfig>, ExternalServicesConfigurationValidation>());
+
+            services.AddHostedService<ValidateOptionsService>();
+
+            services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
+            services.Configure<ExternalServicesConfig>(ExternalServicesConfig.WeatherApi, Configuration.GetSection("ExternalServices:WeatherApi"));
+            services.Configure<ExternalServicesConfig>(ExternalServicesConfig.ProductsApi, Configuration.GetSection("ExternalServices:ProductsApi"));
+
+            services.Configure<ContentConfiguration>(Configuration.GetSection("Content"));
+            services.AddSingleton<IContentConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<ContentConfiguration>>().Value);
+            
             services
                 .AddAppConfiguration(Configuration)
                 .AddBookingServices()
