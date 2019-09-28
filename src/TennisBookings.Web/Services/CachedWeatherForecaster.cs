@@ -11,7 +11,7 @@ namespace TennisBookings.Web.Services
     {
         private readonly IWeatherForecaster _weatherForecaster;
         private readonly IDistributedCache<CurrentWeatherResult> _cache;
-        private readonly ExternalServicesConfig _externalServicesConfig;
+        // private readonly ExternalServicesConfig _externalServicesConfig;
         private readonly int _minsToCache;
 
         public bool ForecastEnabled => _weatherForecaster.ForecastEnabled;
