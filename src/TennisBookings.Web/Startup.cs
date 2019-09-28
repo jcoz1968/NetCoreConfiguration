@@ -8,6 +8,8 @@ using TennisBookings.Web.Data;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using TennisBookings.Web.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace TennisBookings.Web
 {
@@ -27,10 +29,9 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            // services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
-            services.AddOptions<HomePageConfiguration>()
-                .Bind(Configuration.GetSection("Features:HomePage"))
-                .ValidateDataAnnotations();
+            services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage"));
+
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<HomePageConfiguration>, HomePageConfigurationValidation>());
 
             services.AddHostedService<ValidateOptionsService>();
 
